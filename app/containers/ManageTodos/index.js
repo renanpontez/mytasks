@@ -1,8 +1,11 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import TodoListComponent from '../../components/TodoList';
 import Container from '@material-ui/core/Container';
-import ManageList from '../../components/ManageList';
-import Grid from '@material-ui/core/Grid';
-
+import Paper from '@material-ui/core/Paper';
+import {objectAssign} from 'object-assign';
+import TodoAddComponent from '../../components/TodoAdd';
 
 const listOfTodos =  [
   {
@@ -15,26 +18,13 @@ const listOfTodos =  [
   },
 ];
 
-const listOfLists = [
-  {
-    id: 1,
-    title: 'List 1',
-    items: listOfTodos
-  },
-  {
-    id: 2,
-    title: 'List 1',
-    items: listOfTodos
-  },
-]
-
 class TodoList extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      list: listOfLists,
       todoName: '',
+      todos: listOfTodos
     }
 
     this.handleTodoName = this.handleTodoName.bind(this);
@@ -61,31 +51,26 @@ class TodoList extends React.Component {
     this.setState({todos: newList, todoName: ''});
   }
 
-  removeFromList = (listId, itemId) => {
-    let newList = this.state.listOfLists;
-    newList = newList.filter((val) => {
-      return val.id = listId;
-    });
-    
-    let newListTodos = newList.items;
-    newListTodos = newListTodos.filter((val) => {
+  removeFromList = (itemId) => {
+    let newList = this.state.todos;
+
+    newList = newList.filter((val, i, arr) => {
       return val.id != itemId;
     });
 
-    this.setState({listOfTodos: newList});
+    this.setState({todos: newList});
   }
 
   render() {
     return (
       <>
-        <Grid container>
-          <ManageList 
-            list={this.state.list}
-            todoName={this.state.todoName}
-            addToList={this.addToList}
-            handleTodoName={this.handleTodoName}
-            removeFromList={this.removeFromList} />
-        </Grid>
+        <Container maxWidth="sm">
+          <Paper>
+            <ManageListComponent 
+              list={this.state.list}
+              removeFromList={this.removeFromList} />
+          </Paper>
+        </Container>
       </>
     );
   }
