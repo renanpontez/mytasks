@@ -30,6 +30,10 @@ import 'styles/theme.scss';
 
 import configureStore from './configureStore';
 
+import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
+import { lightBlue, orange } from '@material-ui/core/colors';
+
 // Observe loading of Open Sans (to remove open sans, remove the <link> tag in
 // the index.html file and this observer)
 const openSansObserver = new FontFaceObserver('Open Sans', {});
@@ -46,12 +50,25 @@ const initialState = {};
 const store = configureStore(initialState, history);
 const MOUNT_NODE = document.getElementById('app');
 
+const outerTheme = createMuiTheme({
+  palette: {
+    primary: {
+      main: lightBlue[700],
+    },
+    secondary: {
+      main: orange[500]
+    }
+  },
+});
+
 const render = () => {
   ReactDOM.render(
     <Provider store={store}>
-      <ConnectedRouter history={history}>
-        <App />
-      </ConnectedRouter>
+      <ThemeProvider theme={outerTheme}>
+        <ConnectedRouter history={history}>
+          <App />
+        </ConnectedRouter>
+      </ThemeProvider>
     </Provider>,
     MOUNT_NODE
   );

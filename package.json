@@ -2,10 +2,6 @@
   "name": "react-redux-boilerplate",
   "version": "1.0.0",
   "description": "A minimal react-redux boilerplate with all the best practices",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/flexdinesh/react-redux-boilerplate.git"
-  },
   "license": "MIT",
   "author": "Dinesh Pandiyan",
   "scripts": {
@@ -27,6 +23,8 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.4.4",
+    "@material-ui/core": "^4.3.2",
+    "@material-ui/icons": "^4.2.1",
     "chalk": "^2.4.2",
     "compression": "1.7.4",
     "connected-react-router": "^6.4.0",
@@ -39,6 +37,7 @@
     "ip": "1.1.5",
     "lodash": "4.17.11",
     "minimist": "1.2.0",
+    "object-assign": "^4.1.1",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
