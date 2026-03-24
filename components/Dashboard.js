@@ -25,10 +25,8 @@ export default function Dashboard({ profile, checkIns, todayCount, dailyGoal, to
   const pct = dailyGoal === 0
     ? (todayCount === 0 ? 100 : 0)
     : Math.min((todayCount / dailyGoal) * 100, 100)
-  const isOver = dailyGoal > 0 && todayCount > dailyGoal
+  const isOver = todayCount > dailyGoal
   const isZeroGoal = dailyGoal === 0
-
-  const goalLineBottom = dailyGoal === 0 ? 0 : (dailyGoal / maxBarVal) * 80 // 80px chart height
 
   const todayEntries = checkIns[today] || []
 

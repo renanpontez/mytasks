@@ -10,6 +10,7 @@ export default function Onboarding({ onComplete }) {
   const [weeks, setWeeks] = useState(8)
 
   const handleStep1Next = () => {
+    if (current === 1) setGoalType('quit')
     if (goalAmount >= current) setGoalAmount(Math.max(1, current - 1))
     setStep(2)
   }
@@ -121,6 +122,8 @@ function Step2({
         <button
           className={`goal-toggle-btn${goalType === 'reduce' ? ' active' : ''}`}
           onClick={() => setGoalType('reduce')}
+          disabled={current === 1}
+          title={current === 1 ? 'Already at 1/day — quitting is the only path forward' : undefined}
         >
           ✂️ Reduce
         </button>
@@ -131,6 +134,11 @@ function Step2({
           🚫 Quit
         </button>
       </div>
+      {current === 1 && (
+        <p style={{ fontSize: 12, color: 'var(--text-dim)', marginTop: -16, marginBottom: 8 }}>
+          You&apos;re already at 1/day — quitting is your path forward. You&apos;ve got this.
+        </p>
+      )}
 
       {goalType === 'reduce' && (
         <div style={{ marginBottom: 24 }}>
